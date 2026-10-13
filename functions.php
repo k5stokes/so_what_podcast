@@ -225,9 +225,18 @@ function read_favorites() {
 add_action('wp_ajax_read_favorites', 'read_favorites');
 add_action('wp_ajax_nopriv_read_favorites', 'read_favorites');
 
+/** Read a credential from a wp-config constant, falling back to the server environment. */
+function sw_config($name, $default = '') {
+	if (defined($name)) {
+		return constant($name);
+	}
+	$value = getenv($name);
+	return $value !== false ? $value : $default;
+}
+
 function get_spotify_access_token() {
-	$clientId = constant('SPOTIFY_CLIENTID');
-	$clientSecret = constant('SPOTIFY_CLIENTSECRET');
+	$clientId = sw_config('SPOTIFY_CLIENTID');
+	$clientSecret = sw_config('SPOTIFY_CLIENTSECRET');
 	
 	$authString = base64_encode($clientId . ':' . $clientSecret);
 	
@@ -420,7 +429,7 @@ function get_podcast_episodes_from_rss($feed_url) {
 }
 
 function get_youtube_podcast_episodes($playlist_id, $count = 10) {
-	$google_api_key = constant('GOOGLE_API_KEY');
+	$google_api_key = sw_config('GOOGLE_API_KEY');
     // 1. Construct the API URL
     // We fetch 'snippet' for titles/descriptions and 'contentDetails' for video IDs
     $url = add_query_arg([

@@ -13,12 +13,15 @@
 <div class="grid grid-2-col">
 
 <?php
-	foreach ($youtube_episodes as $episode) {
+	if ( is_wp_error( $youtube_episodes ) || empty( $youtube_episodes ) ) {
+		echo '<p style="text-align: center;">YouTube episode feed is temporarily unavailable.</p>';
+	} else {
+		foreach ($youtube_episodes as $episode) {
         // Access specific properties of each episode object
-        $episode_id = $episode['id'];
-        $episode_name = $episode['title'];
-        $episode_description = $episode['description'];
-        $embed_url = $episode['embed_url'];
+        $episode_id = $episode['video_id'];
+        $episode_name = esc_html($episode['title']);
+        $episode_description = wpautop( esc_html($episode['description']) );
+        $embed_url = esc_url($episode['embed_url']);
         $embed_code = '<iframe data-testid="embed-iframe" style="border-radius:12px" src="' . $embed_url . '" title="YouTube video player" width="100%" height="352" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
 ?>
 <div class="grid-column spotify-episode">
@@ -32,8 +35,9 @@
 	</div>
 </div>
 <?php 
-	$i++;
-	} // end foreach
+		$i++;
+		} // end foreach
+	} // end else
 	
 	/*
 	// SPOTIFY API
