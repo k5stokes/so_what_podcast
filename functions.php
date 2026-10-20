@@ -140,6 +140,7 @@ add_action( 'widgets_init', 'so_what_podcast_widgets_init' );
 function so_what_podcast_scripts() {
 	wp_enqueue_style( 'so_what_podcast-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'so_what_podcast-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'so_what_podcast-custom', get_template_directory_uri() . '/inc/so-what-podcast.css', array( 'so_what_podcast-style' ), _S_VERSION );
 
 	wp_enqueue_script( 'so_what_podcast-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 

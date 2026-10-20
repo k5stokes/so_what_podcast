@@ -10,7 +10,8 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="container container-wide">
+	<div class="container">
+		<h1><?php the_title(); ?></h1>
 		<?php the_content(); ?>
 	</div>
 </article><!-- #post-<?php the_ID(); ?> -->
