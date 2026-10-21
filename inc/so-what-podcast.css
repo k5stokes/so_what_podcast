@@ -216,7 +216,8 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 	margin: 0 auto;
 }
 .site-blurb p {
-	font-size: 28px;
+	font-size: 36px;
+    line-height: 42px;
 }
 @media all and (max-width: 640px) {
 	.site-blurb {
