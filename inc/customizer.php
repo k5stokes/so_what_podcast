@@ -56,6 +56,6 @@ function so_what_podcast_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function so_what_podcast_customize_preview_js() {
-	wp_enqueue_script( 'so_what_podcast-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
+	wp_enqueue_script( 'so_what_podcast-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), so_what_podcast_asset_version( 'js/customizer.js' ), true );
 }
 add_action( 'customize_preview_init', 'so_what_podcast_customize_preview_js' );

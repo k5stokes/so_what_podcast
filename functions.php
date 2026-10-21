@@ -135,14 +135,26 @@ function so_what_podcast_widgets_init() {
 add_action( 'widgets_init', 'so_what_podcast_widgets_init' );
 
 /**
+ * Version a theme asset by its last-modified time so browsers fetch it again after it changes.
+ *
+ * @param string $relative_path Path relative to the theme directory.
+ * @return string
+ */
+function so_what_podcast_asset_version( $relative_path ) {
+	$file = get_template_directory() . '/' . ltrim( $relative_path, '/' );
+	$modified = file_exists( $file ) ? filemtime( $file ) : false;
+	return $modified ? (string) $modified : _S_VERSION;
+}
+
+/**
  * Enqueue scripts and styles.
  */
 function so_what_podcast_scripts() {
-	wp_enqueue_style( 'so_what_podcast-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'so_what_podcast-style', get_stylesheet_uri(), array(), so_what_podcast_asset_version( 'style.css' ) );
 	wp_style_add_data( 'so_what_podcast-style', 'rtl', 'replace' );
-	wp_enqueue_style( 'so_what_podcast-custom', get_template_directory_uri() . '/inc/so-what-podcast.css', array( 'so_what_podcast-style' ), _S_VERSION );
+	wp_enqueue_style( 'so_what_podcast-custom', get_template_directory_uri() . '/inc/so-what-podcast.css', array( 'so_what_podcast-style' ), so_what_podcast_asset_version( 'inc/so-what-podcast.css' ) );
 
-	wp_enqueue_script( 'so_what_podcast-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'so_what_podcast-navigation', get_template_directory_uri() . '/js/navigation.js', array(), so_what_podcast_asset_version( 'js/navigation.js' ), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
