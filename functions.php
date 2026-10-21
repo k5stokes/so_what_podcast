@@ -175,6 +175,7 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/youtube-post-importer.php';
 
 /**
  * Load Jetpack compatibility file.

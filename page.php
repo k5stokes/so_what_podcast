@@ -21,7 +21,13 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'template-parts/content', is_front_page() ? 'front-page' : 'page' );
+			if ( is_front_page() ) {
+				get_template_part( 'template-parts/content', 'front-page' );
+			} elseif ( is_page( 'episodes' ) ) {
+				get_template_part( 'template-parts/content', 'episodes' );
+			} else {
+				get_template_part( 'template-parts/content', 'page' );
+			}
 
 			// If comments are open or we have at least one comment, load up the comment template.
 			/*

@@ -17,7 +17,9 @@ get_header();
 			the_post();
 
 			get_template_part( 'template-parts/content', get_post_type() );
-
+		?>
+			<div class="container container-wide swp-post-navigation">
+		<?php
 			the_post_navigation(
 				array(
 					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'so_what_podcast' ) . '</span> <span class="nav-title">%title</span>',
@@ -32,6 +34,7 @@ get_header();
 
 		endwhile; // End of the loop.
 		?>
+			</div> <!-- .container.container-wide -->
 
 	</main><!-- #main -->
 
