@@ -248,6 +248,28 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 }
 
 /* Animated BG */
+.header-bg-i.hidden, .header-bg-ii.hidden {
+	display: none;
+}
+.header-bg-i.active, .header-bg-ii.active {
+	display: block;
+}
+#header-switcher-button {
+	box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    width: 135px;
+    text-align: center;
+    color: #fff;
+    margin: 0 0 5px 5px;
+    line-height: 1.2em;
+    font-size: 12px;
+	cursor: pointer;
+	position: relative;
+	z-index: 1002;
+	
+}
 .site-header {
 	position: relative;
 	overflow: hidden;
@@ -281,27 +303,12 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 }
 
 /* Animated BG II */
-#circles-animation-container{
-    background: #00adef;
-    background: -moz-linear-gradient(-45deg, #00adef 0%, #0076e5 100%);
-    background: -webkit-linear-gradient(-45deg, #00adef 0%,#0076e5 100%);
-    background: linear-gradient(135deg, #00adef 0%,#0076e5 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00adef', endColorstr='#0076e5',GradientType=1 );
-    position: relative;
-    height: 700px;
-    width: 100%;
-    margin: 0px auto;
-    padding: 0px auto;
-}
-#circles-animation-container-inside {
-    position: relative;
-    min-width: 960px;
-    max-width: 1280px;
-    height: auto;
-    min-height: 100%;
-    margin: 0px auto;
-    padding: 0px auto;
-    overflow: visible;
+#masthead {
+    background: #9FD8CB;
+    background: -moz-linear-gradient(-45deg, #c002c0 0%, #9FD8CB 100%);
+    background: -webkit-linear-gradient(-45deg, #c002c0 0%,#9FD8CB 100%);
+    background: linear-gradient(135deg, #c002c0 0%,#9FD8CB 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c002c0', endColorstr='#9FD8CB',GradientType=1 );
 }
 #circle-small {
     -webkit-animation: circle-small-scale 3s ease-in-out infinite alternate;
@@ -559,6 +566,9 @@ body.dark-mode h4, body.dark-mode footer {
 body.dark-mode a:visited {
 	color: #c150c1;
 }
+body.dark-mode .site-blurb p, body.dark-mode .podcast-directories h5 {
+	color: #ffffff !important;
+}
 @media all and (prefers-color-scheme: dark) {
 	body/*, .site-blurb */{
 		background: #121212 !important;
@@ -577,6 +587,9 @@ body.dark-mode a:visited {
 	}
 	a:visited, a:hover {
 		color: #c150c1;
+	}
+	.site-blurb p, .podcast-directories h5 {
+		color: #ffffff !important;
 	}
 	
 	/* Light Mode from UI toggle button */
@@ -597,5 +610,8 @@ body.dark-mode a:visited {
 	}
 	body.light-mode a:visited, body.light-mode a:hover {
 		color: #800080;
+	}
+	body.light-mode .site-blurb p, body.light-mode .podcast-directories h5 {
+		color: #000000 !important;
 	}
 }
