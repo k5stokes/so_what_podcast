@@ -548,3 +548,11 @@ function setup_blocks() {
 		]);
 	}
 }
+
+// Throttle WordPress Heartbeat API to reduce server load
+add_filter( 'heartbeat_settings', 'podsowhat_throttle_heartbeat' );
+function podsowhat_throttle_heartbeat( $settings ) {
+    // Override the interval to 60 seconds (the maximum allowed by core)
+    $settings['interval'] = 60;
+    return $settings;
+}
