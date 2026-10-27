@@ -214,6 +214,7 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 	text-align: center;
 	/* background: #fff; */
 	margin: 0 auto;
+	position: relative;
 }
 .site-blurb p {
 	font-size: 36px;
