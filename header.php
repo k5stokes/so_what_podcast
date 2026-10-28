@@ -52,7 +52,7 @@
 			<h2 class="font-solway">A Podcast</h2>
 		</div>
 	</a>
-	<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'so_what_podcast' ); ?></button>
+	<!-- <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'so_what_podcast' ); ?></button> -->
 	<?php
 	wp_nav_menu(
 		array(

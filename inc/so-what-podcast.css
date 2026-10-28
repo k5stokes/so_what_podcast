@@ -220,34 +220,6 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 	font-size: 36px;
     line-height: 42px;
 }
-@media all and (max-width: 640px) {
-	.site-blurb {
-		width: 100%;
-		padding: 0 20px 0;
-	}
-}
-@media all and (max-width: 500px) {
-	.site-blurb {
-		bottom: 0;
-	}
-	
-}
-@media all and (max-width: 450px) {
-	.site-branding {
-		width: 350px;
-		height: 350px;
-		padding: 20px 20px 0;
-	}
-	.site-branding h1 {
-		font-size: 85px;
-		line-height: 75px;
-		padding-top: 30px;
-	}
-	.site-blurb {
-		position: relative;
-		/* margin-top: -70px; */
-	}
-}
 
 /* Animated BG */
 .header-bg-i.hidden, .header-bg-ii.hidden {
@@ -403,6 +375,7 @@ body.light-mode .main-navigation a:hover, body.dark-mode .main-navigation a:hove
 .podcast-directories {
 	margin-top: 60px;
 	margin-bottom: 40px;
+	position: relative;
 }
 .podcast-directories .grid {
 	max-width: 275px;
