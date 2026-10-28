@@ -679,7 +679,7 @@ body.dark-mode .site-blurb p, body.dark-mode .podcast-directories h5 {
 	h4, footer {
 		background: #143935 !important;
 	}
-	a:visited, a:hover {
+	a:hover {
 		color: #c150c1;
 	}
 	.site-blurb p, .podcast-directories h5 {
