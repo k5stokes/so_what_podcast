@@ -30,7 +30,7 @@
 					<div class="container">
 						<div class="podcast-directories">
 							<h5>Subscribe to <em>So What?</em> Podcast</h5>
-							<div class="grid grid-3-col grid-centered">
+							<div class="podcast-directories-container">
 				<?php 
 					while (have_rows('podcast_directories', 'option')) : the_row();
 						$podcast_directory_title = get_sub_field('podcast_directory_name');
