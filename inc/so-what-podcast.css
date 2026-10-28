@@ -50,6 +50,11 @@ h1 {
 	margin-top: 60px;
 	margin-bottom: 20px;
 }
+@media all and (max-width: 660px) {
+	article h1 {
+		margin-top: 160px;
+	}
+}
 a {
 	color: #B87D4B;
 }
