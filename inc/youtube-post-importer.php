@@ -8,15 +8,39 @@
 define( 'SO_WHAT_YOUTUBE_PLAYLIST_ID', 'PLwcja8Y_R4ydyUCCk2NROLh8eFBuipORg' );
 define( 'SO_WHAT_YOUTUBE_IMPORT_AUTHOR', 'admin_e4uidhu7' );
 
+add_filter( 'cron_schedules', 'so_what_youtube_cron_schedules' );
 add_action( 'init', 'so_what_youtube_schedule_import' );
 add_action( 'sw_what_youtube_import', 'so_what_youtube_import_episodes' );
 add_action( 'switch_theme', 'so_what_youtube_unschedule_import' );
 add_action( 'admin_menu', 'so_what_youtube_add_import_page' );
 add_action( 'admin_post_so_what_youtube_import', 'so_what_youtube_handle_manual_import' );
 
+function so_what_youtube_cron_schedules( $schedules ) {
+	$schedules['so_what_youtube_five_minutes'] = array(
+		'interval' => 5 * MINUTE_IN_SECONDS,
+		'display'  => __( 'Every five minutes (YouTube importer)', 'so_what_podcast' ),
+	);
+
+	return $schedules;
+}
+
 function so_what_youtube_schedule_import() {
-	if ( ! wp_next_scheduled( 'sw_what_youtube_import' ) ) {
-		wp_schedule_event( time() + HOUR_IN_SECONDS, 'hourly', 'sw_what_youtube_import' );
+	$event = wp_get_scheduled_event( 'sw_what_youtube_import' );
+
+	if ( $event && 'so_what_youtube_five_minutes' !== $event->schedule ) {
+		$result = wp_clear_scheduled_hook( 'sw_what_youtube_import', array(), true );
+		if ( is_wp_error( $result ) ) {
+			error_log( 'YouTube importer schedule migration failed: ' . $result->get_error_message() );
+			return;
+		}
+		$event = false;
+	}
+
+	if ( ! $event ) {
+		$result = wp_schedule_event( time() + 5 * MINUTE_IN_SECONDS, 'so_what_youtube_five_minutes', 'sw_what_youtube_import', array(), true );
+		if ( is_wp_error( $result ) ) {
+			error_log( 'YouTube importer scheduling failed: ' . $result->get_error_message() );
+		}
 	}
 }
 
@@ -295,6 +319,7 @@ function so_what_youtube_render_import_page() {
 	<div class="wrap">
 		<h1><?php esc_html_e( 'YouTube Draft Importer', 'so_what_podcast' ); ?></h1>
 		<p><?php esc_html_e( 'Checks the podcast playlist and creates a draft for each released public video not already imported.', 'so_what_podcast' ); ?></p>
+		<p><?php esc_html_e( 'Automatic checks are scheduled every five minutes. WP-Cron depends on site traffic, so checks may be delayed when the site is quiet.', 'so_what_podcast' ); ?></p>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="so_what_youtube_import">
 			<?php wp_nonce_field( 'so_what_youtube_import' ); ?>
